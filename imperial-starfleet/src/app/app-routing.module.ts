@@ -6,6 +6,10 @@ import { TurretComponent } from './internal-defenses/turret/turret.component';
 
 const routes: Routes = [
     {
+        path: 'info/:id',
+        component: InfoWindowComponent,
+    },
+    {
         path: 'info',
         component: InfoWindowComponent
     }
