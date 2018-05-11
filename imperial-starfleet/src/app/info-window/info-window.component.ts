@@ -2,6 +2,7 @@ import { Http } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class InfoWindowComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.forEach( (element) => {
-        console.log('NG ON IT', element.id)
+        console.log('NG ON IT', element.id);
         if (element.id) {
           this.findTurret(element.id);
         }
@@ -25,12 +26,19 @@ export class InfoWindowComponent implements OnInit {
   findTurret(turretNumber) {
     console.log('called findturrett method');
     this.http.get('http://localhost:3000/api/turret/' + turretNumber)
-    .toPromise()
-    .then( (response) => {
+    .subscribe( (response) => {
       console.log(response);
       console.log(response.json());
       this.dataBanks = response.json();
     });
   }
+  //   this.http.get('http://localhost:3000/api/turret/' + turretNumber)
+  //   .toPromise()
+  //   .then( (response) => {
+  //     console.log(response);
+  //     console.log(response.json());
+  //     this.dataBanks = response.json();
+  //   });
+  // }
 
 }
